@@ -1,6 +1,6 @@
 var assert = require("test/assert");
 
-var compile = require("../lib/template").compile;
+var compile = require("../lib/normal-template").compile;
 
 exports.testInterpolation = function() {
     var t = compile("Hello {=name}, {=article/title} {=article/deep/value}");
@@ -110,6 +110,34 @@ exports.testWithReduceOr = function() {
     assert.isEqual("no articles", t(data));
 }
 
+exports.testDefaultFilter = function() {
+    var t = compile("{=name}");
+    var data = {name: "George >> 2"};
+    assert.isEqual("George &gt;&gt; 2", t(data));
+}
+
+exports.testCustomFilters = function() {
+    var t = compile("{=upcase name}", {filters: {
+        upcase: function(val) {
+            return val.toString().toUpperCase();
+        }
+    }});
+    var data = {name: "George"};
+    assert.isEqual("GEORGE", t(data));
+}
+
+exports.testMultipleFilters = function() {
+    var t = compile("{=lispy upcase name}", {filters: {
+        upcase: function(val) {
+            return val.toString().toUpperCase();
+        },
+        lispy: function(val) {
+            return "((" + val + "))";
+        }
+    }});
+    var data = {name: "George"};
+    assert.isEqual("((GEORGE))", t(data));
+}
 
 /*
 exports.testIgnoreNumericInterpolator = function() {
