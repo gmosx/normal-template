@@ -138,3 +138,9 @@ exports.testMultipleFilters = function() {
     var data = {name: "George"};
     assert.isEqual("((GEORGE))", t(data));
 }
+
+exports.testNewlinesBug = function() {
+    var t = compile("hello\n {=name}\nworld\n");
+    var data = {name: "George"};
+    assert.isEqual("hello\n George\nworld\n", t(data));
+}

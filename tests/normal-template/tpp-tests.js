@@ -2,11 +2,11 @@ var assert = require("test/assert");
 
 var TPP = require("../../lib/normal-template/tpp");
 
-exports.testGetTemplate = function() {
+exports.testGetTemplatePath = function() {
     var src = "{#t /path/to/layout.html} this is a template {#def content}the content{/#def}";
-    assert.isEqual("/path/to/layout.html", TPP.getTemplate(src));
+    assert.isEqual("/path/to/layout.html", TPP.getTemplatePath(src));
     var src = "{#template /path/to/layout.html} this is a template {#def content}the content{/#def}";
-    assert.isEqual("/path/to/layout.html", TPP.getTemplate(src));
+    assert.isEqual("/path/to/layout.html", TPP.getTemplatePath(src));
 }
 
 exports.testExtractData = function() {
