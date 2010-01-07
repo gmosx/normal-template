@@ -1,6 +1,7 @@
 var assert = require("test/assert");
 
-var compile = require("../lib/normal-template").compile;
+var TEMPLATE = require("../lib/normal-template"),
+    compile = TEMPLATE.compile;
 
 exports.testInterpolation = function() {
     var t = compile("Hello {=name}, {=article/title} {=article/deep/value}");
@@ -111,7 +112,7 @@ exports.testWithReduceOr = function() {
 }
 
 exports.testDefaultFilter = function() {
-    var t = compile("{=name}");
+    var t = compile("{=name}", {filters: {defaultfilter: TEMPLATE.filters.html}});
     var data = {name: "George >> 2"};
     assert.isEqual("George &gt;&gt; 2", t(data));
 }
@@ -144,3 +145,4 @@ exports.testNewlinesBug = function() {
     var data = {name: "George"};
     assert.isEqual("hello\n George\nworld\n", t(data));
 }
+
