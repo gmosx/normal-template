@@ -50,11 +50,11 @@ exports.testCurly = function() {
 }
 
 exports.testIfElse = function() {
-    var t = compile("{:if cool}cool{:e}not cool{/:if}");
+    var t = compile("{:if cool}cool {=outer}{:e}not cool{/:if}");
     var data = {};
     assert.isEqual("not cool", t(data));
-    var data = {cool: "ok"};
-    assert.isEqual("cool", t(data));
+    var data = {cool: "ok", outer: "this is outer"};
+    assert.isEqual("cool this is outer", t(data));
 }
 
 exports.testWithOr = function() {
@@ -140,9 +140,15 @@ exports.testMultipleFilters = function() {
     assert.isEqual("((GEORGE))", t(data));
 }
 
-exports.testNewlinesBug = function() {
+exports.testNewlinesEscaping = function() {
     var t = compile("hello\n {=name}\nworld\n");
     var data = {name: "George"};
     assert.isEqual("hello\n George\nworld\n", t(data));
+}
+
+exports.testQuotesEscaping = function() {
+    var t = compile('hello "{=name}", how "are" you?');
+    var data = {name: "George"};
+    assert.isEqual('hello "George", how "are" you?', t(data));
 }
 
