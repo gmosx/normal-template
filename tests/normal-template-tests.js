@@ -152,3 +152,8 @@ exports.testQuotesEscaping = function() {
     assert.isEqual('hello "George", how "are" you?', t(data));
 }
 
+exports.testCurlyBrackets = function() {
+    var t = compile('enclose in {:lcb}brackets{:rcb}');
+    var data = {};
+    assert.isEqual('enclose in {brackets}', t(data));
+}
