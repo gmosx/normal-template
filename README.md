@@ -1,20 +1,70 @@
-Normal Template
+docNormal Template
 ===============
 
-A simple yet powerful template engine. Normal template implements a 'push' model, the template data are pre-computed and 'pushed' to the template encoded as JSON. Normal templates are safe and perfectly usable in non HTML/XHTML contexts.
-
-Normal templates are inspired by StringTemplate, JSON-Template and Mustache.
+Normal templates are simple, yet powerful. They are safe, usable in non XML/HTML contexts and portable to any programming language. This package contains a CommonJS compatible JavaScript implementation.
 
 
-Example
--------
+Using the template
+------------------
 
+var TEMPLATE = require("normal-template");
+
+var template = TEMPLATE.compile("hello {=name}"), // compile the input string into a template function
+    data = {name: "George"}; // the data dictionary passed as a JSON structure
+    
+print(template(data)); // renders the template using the provided data dictionary, prints 'hello George'    
+
+
+Syntax
+------
+
+Template commands are enclosed in curly braces. A carefully defined set of commands are provided.
+
+* Interpolation {=key}
+
+Interpolates the value of 'key' from the data dictionary. You can provide optional filters
+
+{=uri key}
+{=html uri key}
+
+* Condition
+
+{:if key}...{:else}...{/:if}
+
+* Reduce
+
+{:reduce array}
+    {=key}
+{/:reduce}
+
+* With
+
+{:with obj}
+
+{/:w}
+
+
+Preprocessor
+------------
+
+{#template path}
+
+{#def name}
+{/#def}
+
+{#include path}
+
+- comments
+- shortcuts
+- doc names
 
 
 Credits
 -------
 
 * George Moschovitis <george.moschovitis@gmail.com>
+
+Normal templates are inspired by StringTemplate, JSON-Template and Mustache.
 
 
 License
