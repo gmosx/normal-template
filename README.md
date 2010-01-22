@@ -126,6 +126,23 @@ You can prefix the path with one or more filters:
     {=html name}
     {=head html name}
     
+The following filters are provided by default:
+
+* str, no escaping (useful to override the default filter)
+* html, html escaping
+* attibute, tag attribute escaping
+* uri, URI escaping
+
+Custom filters can be provided to the template compiler:
+
+    var template = TEMPLATE.compile("Hello {=upcase name}", {filters: {
+        upcase: function(val) {
+            return val.toString().toUpperCase();
+        }
+    }});
+    var data = {name: "George"};
+    template(data) // => Hello GEORGE
+    
     
 Condition
 ---------
@@ -172,10 +189,10 @@ Iteration of collections is supported with the {:reduce} statement, itself an ex
 
     data = {
         "name": "George",
-        "articles": [
-            { "Hello world", 34 },
-            { "Another article", 23 },
-            { "The final", 7 }
+        articles: [
+            { title: "Hello world", count: 34 },
+            { title: "Another article", count: 23 },
+            { title: "The final", count: 7 }
         ]
     }
 
@@ -202,6 +219,8 @@ Here are some more complicated examples that demonstrate the usage of xpath for 
             {title: "Hello", content: "World"},
         ]
     }
+    
+    {:! this is a comment, ignore me }
     
     {:r articles}
         {=title} {=/version}
