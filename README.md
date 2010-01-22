@@ -147,7 +147,7 @@ Custom filters can be provided to the template compiler:
 Condition
 ---------
 
-Conditional rendering is supported through a stanrd if-else construct:
+Conditional rendering is supported through a standard if-else construct:
 
     {:if admin}
     Hello Admin
