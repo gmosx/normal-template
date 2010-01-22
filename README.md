@@ -32,9 +32,9 @@ template.html:
     </ul>
     
     {:if admin}
-    You have admin rights
+        You have admin rights
     {:else}
-    You don't have admin rights
+        You don't have admin rights
     {/:if}
     </html>
 
