@@ -16,11 +16,11 @@ exports.testComments = function() {
 }
 
 exports.testWith = function() {
-    var t = compile("Hello {:with user}{=name}, {=age}{/:with}");
+    var t = compile("Hello {:select user}{=name}, {=age}{/:select}");
     var data = {user: {name: "George", age: "34"}};
     assert.isEqual("Hello George, 34", t(data));
     
-    t = compile("Hello {:w deep/user}{=name}, {=age}{/:w}");
+    t = compile("Hello {:s deep/user}{=name}, {=age}{/:s}");
     data = {deep: {user: {name: "Stella", age: "34"}}};
     assert.isEqual("Hello Stella, 34", t(data));
 }
@@ -58,7 +58,7 @@ exports.testIfElse = function() {
 }
 
 exports.testWithOr = function() {
-    var t = compile("{:with cool}cool{:or}not cool{/:with}");
+    var t = compile("{:s cool}cool{:e}not cool{/:s}");
     var data = {};
     assert.isEqual("not cool", t(data));
 }
@@ -76,7 +76,7 @@ exports.testInterpolateNone = function() {
 }
 
 exports.testDot = function() {
-    var t = compile("{:with cool}{=.}{:or}not cool{/:with}");
+    var t = compile("{:s cool}{=.}{:s}not cool{/:s}");
     var data = {cool: 34};
     assert.isEqual("34", t(data));
 }
@@ -99,7 +99,7 @@ exports.testReduceOr = function() {
 
 // stupid, but lets test this.
 exports.testWithReduceOr = function() {
-    var t = compile("{:w articles}{:r .}<li>{=title}: {=content}</li>{/:r}{:or}no articles{/:w}");
+    var t = compile("{:s articles}{:r .}<li>{=title}: {=content}</li>{/:r}{:e}no articles{/:s}");
     var data = {articles: [
         {title: "Hello1", content: "World1"},
         {title: "Hello2", content: "World2"},
