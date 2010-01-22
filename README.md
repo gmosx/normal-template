@@ -99,8 +99,8 @@ Template commands are enclosed in curly braces. A carefully defined set of comma
 Moreover, a number of static commands are applied during an optional compile-time pre-processing step:
 
 * Static inclusion {#include /path/to/fragment}
-* Super template {#template /path/to/super/template}
-* Block definitions to be injected in the super template {#def name} .. {/#def}
+* Meta template {#template /path/to/meta/template}
+* Block definitions to be injected in the meta template {#def name} .. {/#def}
 
 
 Interpolation
