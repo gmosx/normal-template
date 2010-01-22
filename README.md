@@ -188,6 +188,30 @@ Iteration of collections is supported with the {:reduce} statement, itself an ex
 As a shortcut you can use the {:r collectionpath}, {:e}, {/:r} tags.
 
 
+More examples
+-------------
+
+Here are some more complicated examples that demonstrate the usage of xpath for extracting values from the data dictionary:
+
+    data = {
+        version: 1,
+        admin: "true",
+        articles: [
+            {title: "Hello", content: "World"},
+            {title: "Hello", content: "World"},
+            {title: "Hello", content: "World"},
+        ]
+    }
+    
+    {:r articles}
+        {=title} {=/version}
+    {/:r}
+    
+    {:s admin}
+        {=.}
+    {/:s}
+
+
 Meta Template
 -------------
 
