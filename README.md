@@ -6,19 +6,8 @@ Normal templates are simple, yet powerful. They are safe, usable in non XML/HTML
 This package contains a CommonJS compatible JavaScript implementation.
 
 
-Using the template
-------------------
-
-var TEMPLATE = require("normal-template");
-
-var template = TEMPLATE.compile("hello {=name}"), // compile the input string into a template function
-    data = {name: "George"}; // the data dictionary passed as a JSON structure
-    
-print(template(data)); // renders the template using the provided data dictionary, prints 'hello George'    
-
-
-Example 
--------
+Usage
+-----
 
 template.html:
 
