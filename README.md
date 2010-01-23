@@ -3,7 +3,13 @@ Normal Template
 
 Normal templates are simple, yet powerful. They are safe, usable in non XML/HTML contexts and portable to any programming language. 
 
-This package contains a CommonJS compatible JavaScript implementation.
+This package contains a CommonJS compatible JavaScript implementation. It is part of the [Nitro](http://www.nitrojs.org/) ecosystem of Web Application development tools.
+
+* Homepage: [http://www.nitrojs.org/](http://www.nitrojs.org/)
+* Status updates: [http://twitter.com/nitrojs](http://twitter.com/nitrojs)
+* Source & Download: [http://github.com/gmosx/normal-template/](http://github.com/gmosx/normal-template/)
+* Mailing list: [http://groups.google.com/group/normal-template](http://groups.google.com/group/normal-template)
+* Issue tracking: [http://github.com/gmosx/normal-template/issues](http://github.com/gmosx/normal-template/issues)
 
 
 Usage
@@ -280,7 +286,7 @@ compiled template:
         </body>
     </html>
 
-In essence, the blocks defined in the template are passed as the values in the datadictionary passed to the meta-template. Both templates are evaluated.
+In essence, the blocks defined in the template are passed as the values in the data dictionary passed to the meta-template. Both templates are evaluated.
 
 
 Credits
