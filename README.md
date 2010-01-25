@@ -100,7 +100,7 @@ Template commands are enclosed in curly braces. A carefully defined set of comma
 * Reduce {:reduce} .. {:reduce} .. {/:reduce}
 * If {:if} .. {:else} .. {/:if}
 * Comment {:! this is a comment }
-* Meta {:lb}, {:rb} emit {, }
+* Escape {:lb}, {:rb} emit the delimeters '{', '}'
 
 Moreover, a number of static commands are applied during an optional compile-time pre-processing step:
 
