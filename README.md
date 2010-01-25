@@ -108,6 +108,8 @@ Moreover, a number of static commands are applied during an optional compile-tim
 * Meta template {#template /path/to/meta/template}
 * Block definitions to be injected in the meta template {#def name} .. {/#def}
 
+The template compiler performs syntax error checks and detects unbalanced commands or not closed command tags.
+
 
 Interpolation
 -------------
@@ -230,7 +232,7 @@ Here are some more complicated examples that demonstrate the usage of xpath for 
     
     {:r articles}
         {=title} {=/version}
-    {/:r}
+    {/:r articles} {:! you can repeat the path of the opening tag for extra readability }
     
     {:s admin}
         {=.}
