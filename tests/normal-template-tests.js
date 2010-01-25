@@ -177,3 +177,10 @@ exports.testSyntaxErrors = function() {
         assert.isEqual("Error: Unbalanced 'select' tag, is not closed", e.toString());
     }    
 }
+
+exports.testIfBoolean = function() {
+    var t = compile("{:if bool}true{:e}not true{/:if}");
+    var data = {bool: false};
+    assert.isEqual("not true", t(data));
+}
+
