@@ -184,3 +184,17 @@ exports.testIfBoolean = function() {
     assert.isEqual("not true", t(data));
 }
 
+exports.testInterpolationEscaping = function() {
+    try {
+        compile("hello {=name|test}")    
+    } catch (e) {
+        assert.isEqual("Error: Invalid characters in path 'name|test'", e.toString());
+    }    
+    
+    try {
+        compile("hello {=name;test}")    
+    } catch (e) {
+        assert.isEqual("Error: Invalid characters in path 'name;test'", e.toString());
+    }    
+}
+
