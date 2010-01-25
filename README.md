@@ -108,6 +108,8 @@ Moreover, a number of static commands are applied during an optional compile-tim
 * Meta template {#template /path/to/meta/template}
 * Block definitions to be injected in the meta template {#def name} .. {/#def}
 
+Please note that the paths in #include and #template include a leading '/'. 
+
 The template compiler performs syntax error checks and detects unbalanced commands or not closed command tags.
 
 
@@ -271,7 +273,7 @@ template.html
     
     {#def content}
         This is an example
-        {#include fragment.inc.html}
+        {#include /fragment.inc.html}
     {/#def}
     
 compiled template:
