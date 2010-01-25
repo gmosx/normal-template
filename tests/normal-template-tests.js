@@ -15,7 +15,7 @@ exports.testComments = function() {
     assert.isEqual("Hello Stella", t(data));
 }
 
-exports.testWith = function() {
+exports.testSelect = function() {
     var t = compile("Hello {:select user}{=name}, {=age}{/:select}");
     var data = {user: {name: "George", age: "34"}};
     assert.isEqual("Hello George, 34", t(data));
@@ -57,7 +57,7 @@ exports.testIfElse = function() {
     assert.isEqual("cool this is outer", t(data));
 }
 
-exports.testWithOr = function() {
+exports.testSelectElse = function() {
     var t = compile("{:s cool}cool{:e}not cool{/:s}");
     var data = {};
     assert.isEqual("not cool", t(data));
@@ -76,13 +76,13 @@ exports.testInterpolateNone = function() {
 }
 
 exports.testDot = function() {
-    var t = compile("{:s cool}{=.}{:s}not cool{/:s}");
+    var t = compile("{:s cool}{=.}{:e}not cool{/:s}");
     var data = {cool: 34};
     assert.isEqual("34", t(data));
 }
 
-exports.testReduceOr = function() {
-    var t = compile('{:r articles}<li>{=title}: {=content}</li>{:or}no articles{/:r}');
+exports.testReduceElse = function() {
+    var t = compile('{:r articles}<li>{=title}: {=content}</li>{:e}no articles{/:r}');
     var data = {articles: [
         {title: "Hello1", content: "World1"},
         {title: "Hello2", content: "World2"},
@@ -98,7 +98,7 @@ exports.testReduceOr = function() {
 }
 
 // stupid, but lets test this.
-exports.testWithReduceOr = function() {
+exports.testSelectReduceElse = function() {
     var t = compile("{:s articles}{:r .}<li>{=title}: {=content}</li>{/:r}{:e}no articles{/:s}");
     var data = {articles: [
         {title: "Hello1", content: "World1"},
@@ -153,7 +153,27 @@ exports.testQuotesEscaping = function() {
 }
 
 exports.testCurlyBrackets = function() {
-    var t = compile('enclose in {:lcb}brackets{:rcb}');
+    var t = compile('enclose in {:lb}brackets{:rb}');
     var data = {};
     assert.isEqual('enclose in {brackets}', t(data));
+}
+
+exports.testSyntaxErrors = function() {
+    try {
+        compile("{/:s articles}articles")
+    } catch (e) {
+        assert.isEqual("Error: Unbalanced 'select' close tag", e.toString());
+    }
+
+    try {
+        compile("{:if user}{:s articles}articles{/:if}")    
+    } catch (e) {
+        assert.isEqual("Error: Unbalanced 'if' close tag, expecting 'select' close tag", e.toString());
+    }
+    
+    try {
+        compile("{:if user}{:s articles}articles")    
+    } catch (e) {
+        assert.isEqual("Error: Unbalanced 'select' tag, is not closed", e.toString());
+    }    
 }
