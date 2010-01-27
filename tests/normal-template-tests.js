@@ -198,3 +198,8 @@ exports.testInterpolationEscaping = function() {
     }    
 }
 
+exports.testBackslashEscaping = function() {
+    var t = compile("if (/\\/fora\\/topics/.test(e.target.href)) {");
+    var data = {};
+    assert.isEqual("if (/\\/fora\\/topics/.test(e.target.href)) {", t(data));
+}
