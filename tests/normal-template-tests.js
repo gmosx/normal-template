@@ -203,3 +203,15 @@ exports.testBackslashEscaping = function() {
     var data = {};
     assert.isEqual("if (/\\/fora\\/topics/.test(e.target.href)) {", t(data));
 }
+
+exports.testReduceSelectInterpolate = function() {
+    var t = compile("{:r articles}{=title} {:s forum}{=title}{/:s} {=count}{/:r}");
+    var data = {
+        articles: [
+            {title: "Hello1", count: 1, forum: { title: "Forum1" }},
+            {title: "Hello2", count: 2, forum: { title: "Forum2" }}            
+        ]
+    };
+    assert.isEqual("Hello1 Forum1 1Hello2 Forum2 2", t(data));
+}
+
