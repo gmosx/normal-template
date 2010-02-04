@@ -5,6 +5,8 @@ Normal templates are simple, yet powerful. They are safe, usable in non XML/HTML
 
 This package contains a CommonJS compatible JavaScript implementation. It is part of the [Nitro](http://www.nitrojs.org/) ecosystem of Web Application development tools.
 
+A Python port is available at: [http://github.com/tkouts/py-normal-template](http://github.com/tkouts/py-normal-template)
+
 * Homepage: [http://www.nitrojs.org/](http://www.nitrojs.org/)
 * Status updates: [http://twitter.com/nitrojs](http://twitter.com/nitrojs)
 * Source & Download: [http://github.com/gmosx/normal-template/](http://github.com/gmosx/normal-template/)
@@ -291,6 +293,12 @@ compiled template:
     </html>
 
 In essence, the blocks defined in the template are passed as the values in the data dictionary passed to the meta-template. Both templates are evaluated.
+
+
+Implementations
+---------------
+
+Normal Template is programming language agnostic. At the moment implementations are available for JavaScript and Python.
 
 
 Credits
