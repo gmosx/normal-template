@@ -6,4 +6,10 @@
     "email": "george.moschovitis@gmail.com",
     "dependencies": [],
     "lib": "lib",
+    "lean": {
+        "include": [
+            "lib/**/*",
+            "package.json"
+        ]
+    }        
 }
