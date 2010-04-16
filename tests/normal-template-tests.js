@@ -3,19 +3,19 @@ var assert = require("test/assert");
 var TEMPLATE = require("../lib/normal-template"),
     compile = TEMPLATE.compile;
 
-exports.testInterpolation = function() {
+exports.testInterpolation = function () {
     var t = compile("Hello {=name}, {=article/title} {=article/deep/value}");
     var data = {name: "George", article: {title: "News", content: "No news is good news", deep: {value: "found"}}};
     assert.isEqual("Hello George, News found", t(data));
 }
 
-exports.testComments = function() {
+exports.testComments = function () {
     var t = compile("Hello {:! this is a comment }Stella");
     var data = {};
     assert.isEqual("Hello Stella", t(data));
 }
 
-exports.testSelect = function() {
+exports.testSelect = function () {
     var t = compile("Hello {:select user}{=name}, {=age}{/:select}");
     var data = {user: {name: "George", age: "34"}};
     assert.isEqual("Hello George, 34", t(data));
@@ -25,7 +25,7 @@ exports.testSelect = function() {
     assert.isEqual("Hello Stella, 34", t(data));
 }
 
-exports.testReduce = function() {
+exports.testReduce = function () {
     var t = compile("{:r articles}{=title}: {=content} {/:r}");
     var data = {articles: [
         {title: "Hello1", content: "World1"},
@@ -43,13 +43,13 @@ exports.testReduce = function() {
     assert.isEqual("test ", t(data));
 }
 
-exports.testCurly = function() {
-    var t = compile("Hello {=name}, function() { var a = 1 + 2 }");
+exports.testCurly = function () {
+    var t = compile("Hello {=name}, function () { var a = 1 + 2 }");
     var data = {name: "George"};
-    assert.isEqual("Hello George, function() { var a = 1 + 2 }", t(data));
+    assert.isEqual("Hello George, function () { var a = 1 + 2 }", t(data));
 }
 
-exports.testIfElse = function() {
+exports.testIfElse = function () {
     var t = compile("{:if cool}cool {=outer}{:e}not cool{/:if}");
     var data = {};
     assert.isEqual("not cool", t(data));
@@ -57,31 +57,31 @@ exports.testIfElse = function() {
     assert.isEqual("cool this is outer", t(data));
 }
 
-exports.testSelectElse = function() {
+exports.testSelectElse = function () {
     var t = compile("{:s cool}cool{:e}not cool{/:s}");
     var data = {};
     assert.isEqual("not cool", t(data));
 }
 
-exports.testInterpolateNone = function() {
+exports.testInterpolateNone = function () {
     var t = compile("Hello {=value}");
     var data = {};
     assert.isEqual("Hello ", t(data));    
 }
 
-exports.testInterpolateNone = function() {
+exports.testInterpolateNone = function () {
     var t = compile("Hello {=value}");
     var data = {value: 0};
     assert.isEqual("Hello 0", t(data));    
 }
 
-exports.testDot = function() {
+exports.testDot = function () {
     var t = compile("{:s cool}{=.}{:e}not cool{/:s}");
     var data = {cool: 34};
     assert.isEqual("34", t(data));
 }
 
-exports.testReduceElse = function() {
+exports.testReduceElse = function () {
     var t = compile('{:r articles}<li>{=title}: {=content}</li>{:e}no articles{/:r}');
     var data = {articles: [
         {title: "Hello1", content: "World1"},
@@ -98,7 +98,7 @@ exports.testReduceElse = function() {
 }
 
 // stupid, but lets test this.
-exports.testSelectReduceElse = function() {
+exports.testSelectReduceElse = function () {
     var t = compile("{:s articles}{:r .}<li>{=title}: {=content}</li>{/:r}{:e}no articles{/:s}");
     var data = {articles: [
         {title: "Hello1", content: "World1"},
@@ -111,15 +111,15 @@ exports.testSelectReduceElse = function() {
     assert.isEqual("no articles", t(data));
 }
 
-exports.testDefaultFilter = function() {
+exports.testDefaultFilter = function () {
     var t = compile("{=name}", {filters: {defaultfilter: TEMPLATE.filters.html}});
     var data = {name: "George >> 2"};
     assert.isEqual("George &gt;&gt; 2", t(data));
 }
 
-exports.testCustomFilters = function() {
+exports.testCustomFilters = function () {
     var t = compile("{=upcase name}", {filters: {
-        upcase: function(val) {
+        upcase: function (val) {
             return val.toString().toUpperCase();
         }
     }});
@@ -127,12 +127,12 @@ exports.testCustomFilters = function() {
     assert.isEqual("GEORGE", t(data));
 }
 
-exports.testMultipleFilters = function() {
+exports.testMultipleFilters = function () {
     var t = compile("{=lispy upcase name}", {filters: {
-        upcase: function(val) {
+        upcase: function (val) {
             return val.toString().toUpperCase();
         },
-        lispy: function(val) {
+        lispy: function (val) {
             return "((" + val + "))";
         }
     }});
@@ -140,25 +140,25 @@ exports.testMultipleFilters = function() {
     assert.isEqual("((GEORGE))", t(data));
 }
 
-exports.testNewlinesEscaping = function() {
+exports.testNewlinesEscaping = function () {
     var t = compile("hello\n {=name}\nworld\n");
     var data = {name: "George"};
     assert.isEqual("hello\n George\nworld\n", t(data));
 }
 
-exports.testQuotesEscaping = function() {
+exports.testQuotesEscaping = function () {
     var t = compile('hello "{=name}", how "are" you?');
     var data = {name: "George"};
     assert.isEqual('hello "George", how "are" you?', t(data));
 }
 
-exports.testCurlyBrackets = function() {
+exports.testCurlyBrackets = function () {
     var t = compile('enclose in {:lb}brackets{:rb}');
     var data = {};
     assert.isEqual('enclose in {brackets}', t(data));
 }
 
-exports.testSyntaxErrors = function() {
+exports.testSyntaxErrors = function () {
     try {
         compile("{/:s articles}articles")
     } catch (e) {
@@ -178,13 +178,13 @@ exports.testSyntaxErrors = function() {
     }    
 }
 
-exports.testIfBoolean = function() {
+exports.testIfBoolean = function () {
     var t = compile("{:if bool}true{:e}not true{/:if}");
     var data = {bool: false};
     assert.isEqual("not true", t(data));
 }
 
-exports.testInterpolationEscaping = function() {
+exports.testInterpolationEscaping = function () {
     try {
         compile("hello {=name|test}")    
     } catch (e) {
@@ -198,13 +198,13 @@ exports.testInterpolationEscaping = function() {
     }    
 }
 
-exports.testBackslashEscaping = function() {
+exports.testBackslashEscaping = function () {
     var t = compile("if (/\\/fora\\/topics/.test(e.target.href)) {");
     var data = {};
     assert.isEqual("if (/\\/fora\\/topics/.test(e.target.href)) {", t(data));
 }
 
-exports.testReduceSelectInterpolate = function() {
+exports.testReduceSelectInterpolate = function () {
     var t = compile("{:r articles}{=title} {:s forum}{=title}{/:s} {=count}{/:r}");
     var data = {
         articles: [
@@ -215,3 +215,10 @@ exports.testReduceSelectInterpolate = function() {
     assert.isEqual("Hello1 Forum1 1Hello2 Forum2 2", t(data));
 }
 
+exports.testNestedBrackets = function () {
+    var t = compile("{instance: {=singular}}");
+    var data = {
+        singular: "article"
+    };
+    assert.isEqual("{instance: article}", t(data));
+}
