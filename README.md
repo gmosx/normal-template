@@ -50,7 +50,7 @@ template.js:
 
     var FILE = require("file"),
         TEMPLATE = requier("normal-template"),
-        src = FILE.read("template.html").decodeToString(),
+        src = FILE.read("template.html"),
         template = TEMPLATE.compile(src); // compile the input string into a template function
 
     var data = { // the data dictionary in JSON format
