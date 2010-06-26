@@ -1,3 +1,7 @@
+(function () {
+
+var exports = {};
+
 /**
  * Normal Template
  */
@@ -193,3 +197,13 @@ exports.compile = function (src, options) {
 
     return function(data) { return func(data, filters) };
 }
+
+jQuery.extend({
+    compileTemplate: exports.compile,
+    templateFilters: exports.filters,
+    normal: function (normal, data) {
+        return exports.compile(template)(data);
+    }
+})    
+
+})();

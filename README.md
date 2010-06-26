@@ -1,9 +1,9 @@
 Normal Template
 ===============
 
-Normal templates are simple, yet powerful. They are safe, usable in non XML/HTML contexts and portable to any programming language. 
+Normal templates are simple, yet powerful. They are safe, usable in non XML/HTML contexts and portable to any programming language. Normal templates can be used at client or server side.
 
-This package contains a CommonJS compatible JavaScript implementation. It is part of the [Nitro](http://www.nitrojs.org/) ecosystem of Web Application development tools.
+This package contains a CommonJS compatible JavaScript implementation. It is part of the [Nitro](http://www.nitrojs.org/) ecosystem of Web Application development tools. For extra convenience, a jQuery plugin is also included.
 
 A Python port is available at: [http://github.com/tkouts/py-normal-template](http://github.com/tkouts/py-normal-template)
 
@@ -89,6 +89,34 @@ output:
     </ul>
 
     You have admin rights
+    </html>
+
+
+jQuery plugin usage
+-------------------
+
+The distribution contains a jQuery plugin. Using normal-teplate at client-side couldn't be easier:
+
+    <html>
+        <head>
+            <script src="jquery.js"></script>
+            <script src="jquery.normal.js"></script>
+        </head>
+        <body>
+            <div id="panel"></div>
+            <script>
+                var template = "Hello {=user} here are some articles: <ul>{:r articles}<li>{=title}</li>{/:r}</ul>";
+                    data = { 
+                        user: "George", 
+                        articles: [
+                            { title: "Hello world" },
+                            { title: "Another one" }
+                        ]
+                    };
+                    
+                $("#panel").html($.normal(template, data));
+            </script>
+        </body>
     </html>
 
 
